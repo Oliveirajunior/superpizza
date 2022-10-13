@@ -1,4 +1,4 @@
-export function PizzasCard({ sabor, preco, excluir }) {
+export function PizzasCard({ sabor, preco, excluir, alterar }) {
   return (
     <div className="card">
       <div className="card-body">
@@ -7,7 +7,9 @@ export function PizzasCard({ sabor, preco, excluir }) {
         <button className="card-button" type="button" onClick={excluir}>
           Excluir
         </button>
-        <button className="card-button">Alterar</button>
+        <button className="card-button" type="button" onClick={alterar}>
+          Alterar
+        </button>
       </div>
     </div>
   )

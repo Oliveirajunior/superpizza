@@ -1,44 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { PizzasCard } from '../PizzasCard'
 
-export function PizzasForm() {
+export function AlterarPizzasForm() {
   const [sabor, setSabor] = useState('')
   const [preco, setPreco] = useState('')
-  const [pizzas, setPizzas] = useState([])
+  const { id } = useParams()
   let navigate = useNavigate()
 
   const url = 'http://localhost:3000/pizzas'
 
-  async function adicionarPizza() {
+  async function alterarPizza() {
     try {
-      await axios.post(url, { sabor, preco })
-      getData()
-      setSabor('')
-      setPreco('')
+      await axios.put(`${url}/${id}`, { sabor, preco })
+      navigate('/pizzas')
     } catch (error) {
       console.error(error.message)
     }
-  }
-
-  async function excluirPizza(id) {
-    try {
-      await axios.delete(`${url}/${id}`)
-      getData()
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-
-  async function alterarPizza(id) {
-    navigate(`/pizzas/${id}/update`)
   }
 
   async function getData() {
     try {
-      const resultado = await axios.get(url)
-      setPizzas(resultado.data)
+      const resultado = await axios.get(`${url}/${id}`)
+      setSabor(resultado.data.sabor)
+      setPreco(resultado.data.preco)
     } catch (error) {
       console.error(error.message)
     }
@@ -55,7 +40,6 @@ export function PizzasForm() {
           <input
             type="text"
             className="form-control"
-            placeholder="Digite o Sabor"
             id="sabor"
             value={sabor}
             onChange={e => setSabor(e.target.value)}
@@ -65,7 +49,6 @@ export function PizzasForm() {
           <input
             type="text"
             className="form-control"
-            placeholder="Digite o Preco"
             id="preco"
             value={preco}
             onChange={e => setPreco(e.target.value)}
@@ -74,20 +57,11 @@ export function PizzasForm() {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={adicionarPizza}
+          onClick={alterarPizza}
         >
-          Adicionar
+          Alterar
         </button>
       </form>
-      {pizzas.map(pizza => (
-        <PizzasCard
-          key={pizza.id}
-          sabor={pizza.sabor}
-          preco={pizza.preco}
-          excluir={() => excluirPizza(pizza.id)}
-          alterar={() => alterarPizza(pizza.id)}
-        />
-      ))}
     </div>
   )
 }
