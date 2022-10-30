@@ -4,8 +4,8 @@ export function Home() {
   return (
     <div>
       <Navbar />
-      <h1>HOME</h1>
-      <h2>Super Pizza</h2>
+      <h1 className="text-center">HOME</h1>
+      <h2 className="text-center">Super Pizza</h2>
     </div>
   )
 }

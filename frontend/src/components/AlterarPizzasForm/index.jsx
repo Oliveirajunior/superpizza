@@ -29,6 +29,14 @@ export function AlterarPizzasForm() {
     }
   }
 
+  async function cancelar() {
+    try {
+      navigate('/pizzas')
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
   useEffect(() => {
     getData()
   }, [])
@@ -56,10 +64,17 @@ export function AlterarPizzasForm() {
         </div>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary m-1"
           onClick={alterarPizza}
         >
           Alterar
+        </button>
+        <button
+          type="button"
+          className="btn btn-warning m-2"
+          onClick={cancelar}
+        >
+          Cancelar
         </button>
       </form>
     </div>

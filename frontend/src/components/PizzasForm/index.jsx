@@ -54,7 +54,7 @@ export function PizzasForm() {
         <div className="form-group">
           <input
             type="text"
-            className="form-control"
+            className="form-control-md"
             placeholder="Digite o Sabor"
             id="sabor"
             value={sabor}
@@ -64,7 +64,7 @@ export function PizzasForm() {
         <div className="form-group">
           <input
             type="text"
-            className="form-control"
+            className="form-control-md"
             placeholder="Digite o Preco"
             id="preco"
             value={preco}
@@ -73,21 +73,23 @@ export function PizzasForm() {
         </div>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary m-2"
           onClick={adicionarPizza}
         >
           Adicionar
         </button>
       </form>
-      {pizzas.map(pizza => (
-        <PizzasCard
-          key={pizza.id}
-          sabor={pizza.sabor}
-          preco={pizza.preco}
-          excluir={() => excluirPizza(pizza.id)}
-          alterar={() => alterarPizza(pizza.id)}
-        />
-      ))}
+      <div className="m-2">
+        {pizzas.map(pizza => (
+          <PizzasCard
+            key={pizza.id}
+            sabor={pizza.sabor}
+            preco={pizza.preco}
+            excluir={() => excluirPizza(pizza.id)}
+            alterar={() => alterarPizza(pizza.id)}
+          />
+        ))}
+      </div>
     </div>
   )
 }

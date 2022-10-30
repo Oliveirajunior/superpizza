@@ -5,9 +5,9 @@ import { PizzasForm } from '../../components/PizzasForm'
 
 export function PizzasPage() {
   return (
-    <div>
+    <div className="text-center">
       <Navbar />
-      <h1>PÁGINA DAS PIZZAS</h1>
+      <h1 className="m-3">PÁGINA DAS PIZZAS</h1>
       <PizzasForm />
     </div>
   )
