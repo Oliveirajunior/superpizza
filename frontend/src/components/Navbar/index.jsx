@@ -13,7 +13,7 @@ export function Navbar() {
           </a>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
+          <a href="/clientes" className="nav-link">
             Clientes
           </a>
         </li>
