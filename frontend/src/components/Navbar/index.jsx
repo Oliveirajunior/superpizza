@@ -18,8 +18,13 @@ export function Navbar() {
           </a>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
+          <a href="/pedidos" className="nav-link">
             Pedidos
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="/selecao" className="nav-link">
+            Selecao
           </a>
         </li>
       </ul>

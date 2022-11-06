@@ -47,7 +47,7 @@ export function AlterarPizzasForm() {
         <div className="form-group">
           <input
             type="text"
-            className="form-control"
+            className="form-control-md"
             id="sabor"
             value={sabor}
             onChange={e => setSabor(e.target.value)}
@@ -56,7 +56,7 @@ export function AlterarPizzasForm() {
         <div className="form-group">
           <input
             type="text"
-            className="form-control"
+            className="form-control-md"
             id="preco"
             value={preco}
             onChange={e => setPreco(e.target.value)}

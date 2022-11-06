@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-export function AlterarClientesForm() {
-  const [nome, setNome] = useState('')
-  const [fone, setFone] = useState('')
+export function AlterarPedidosForm() {
+  const [cliente_id, setCliente_id] = useState('')
+  const [total, setTotal] = useState('')
   const { id } = useParams()
   let navigate = useNavigate()
 
-  const url = 'http://localhost:3000/clientes'
+  const url = 'http://localhost:3000/pedidos'
 
-  async function alterarCliente() {
+  async function alterarPedido() {
     try {
-      await axios.put(`${url}/${id}`, { nome, fone })
-      navigate('/clientes')
+      await axios.put(`${url}/${id}`, { cliente_id, total })
+      navigate('/pedidos')
     } catch (error) {
       console.error(error.message)
     }
@@ -22,8 +22,8 @@ export function AlterarClientesForm() {
   async function getData() {
     try {
       const resultado = await axios.get(`${url}/${id}`)
-      setNome(resultado.data.nome)
-      setFone(resultado.data.fone)
+      setCliente_id(resultado.data.cliente_id)
+      setTotal(resultado.data.total)
     } catch (error) {
       console.error(error.message)
     }
@@ -31,7 +31,7 @@ export function AlterarClientesForm() {
 
   async function cancelar() {
     try {
-      navigate('/clientes')
+      navigate('/pedidos')
     } catch (error) {
       console.error(error.message)
     }
@@ -48,24 +48,24 @@ export function AlterarClientesForm() {
           <input
             type="text"
             className="form-control-md"
-            id="nome"
-            value={nome}
-            onChange={e => setNome(e.target.value)}
+            id="cliente_id"
+            value={cliente_id}
+            onChange={e => setCliente_id(e.target.value)}
           />
         </div>
         <div className="form-group">
           <input
             type="text"
             className="form-control-md"
-            id="fone"
-            value={fone}
-            onChange={e => setFone(e.target.value)}
+            id="total"
+            value={total}
+            onChange={e => setTotal(e.target.value)}
           />
         </div>
         <button
           type="button"
           className="btn btn-primary m-1"
-          onClick={alterarCliente}
+          onClick={alterarPedido}
         >
           Alterar
         </button>
