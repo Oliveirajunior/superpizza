@@ -22,7 +22,12 @@ export function SelecaoCard({
         </button>
       </div>
       <div className="col">
-        <button className="btn btn-warning" type="button" onClick={alterar}>
+        <button
+          className="btn btn-warning"
+          type="button"
+          onClick={alterar}
+          disabled={true}
+        >
           Alterar
         </button>
       </div>

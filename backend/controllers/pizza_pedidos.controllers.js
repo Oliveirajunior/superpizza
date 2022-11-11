@@ -1,4 +1,5 @@
 const { Pizza_pedido } = require('../models')
+const { Pizza } = require('../models')
 
 module.exports = {
   async listar(req, res) {
@@ -33,7 +34,12 @@ module.exports = {
   },
   async incluir(req, res) {
     try {
-      const { pedido_id, pizza_id, quantidade, subtotal } = req.body
+      const { pedido_id, pizza_id, quantidade } = req.body
+
+      //acesso ao Model PIZZA para trazer a sua variável "preco" e, assim, poder calcular a variável "subtotal" do Model PIZZA_PEDIDO
+      const pizza = await Pizza.findByPk(pizza_id)
+      const subtotal = pizza.preco * quantidade
+
       await Pizza_pedido.create({ pedido_id, pizza_id, quantidade, subtotal })
       return res.json({ msg: 'Cadastro incluído com sucesso!' })
     } catch (error) {

@@ -12,7 +12,10 @@ export function SelecaoForm() {
   //pizzas
   const [pizzas, setPizzas] = useState([])
   const [pizzaSelecionada, setPizzaSelecionada] = useState('')
-  const [preco, setPreco] = useState('')
+  const [preco, setPreco] = useState(0)
+
+  //macetes
+  const [desabilitado, setdesabilitado] = useState(true)
 
   const url = 'http://localhost:3000/selecao'
 
@@ -26,6 +29,7 @@ export function SelecaoForm() {
       setQuantidade('')
       setPizzaSelecionada('')
       setPreco('')
+      setdesabilitado(true)
     } catch (error) {
       console.error(error.message)
     }
@@ -56,13 +60,13 @@ export function SelecaoForm() {
     } catch (error) {
       console.error(error.message)
     }
-    //get Subtotal
   }
 
-  function getSubtotal() {
-    const pizzaFilter = pizzas.filter(pizza => pizza.id == pizzaSelecionada)
+  function getSubtotal(id) {
+    const pizzaFilter = pizzas.filter(pizza => pizza.id == id)
     const precoFilter = pizzaFilter[0].preco
     setPreco(precoFilter)
+    setdesabilitado(false)
   }
 
   useEffect(() => {
@@ -85,10 +89,13 @@ export function SelecaoForm() {
         <div className="form-group">
           <select
             className="form-control-md"
-            value={pizzaSelecionada}
-            onChange={e => setPizzaSelecionada(e.target.value)}
-            onClick={() => getSubtotal()}
+            /* onChange={e => setPizzaSelecionada(e.target.value)} */
+            onClick={e => {
+              getSubtotal(e.target.value)
+              setPizzaSelecionada(e.target.value)
+            }}
           >
+            <option disabled={true}>{'Escolha a Pizza'}</option>
             {pizzas.map(pizza => {
               return (
                 <option key={pizza.id} value={pizza.id}>
@@ -107,8 +114,9 @@ export function SelecaoForm() {
             value={quantidade}
             onChange={e => {
               setQuantidade(e.target.value)
-              getSubtotal()
+              getSubtotal(pizzaSelecionada)
             }}
+            disabled={desabilitado}
           />
         </div>
         <div className="form-group">
