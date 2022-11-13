@@ -16,6 +16,7 @@ export function SelecaoForm() {
 
   //macetes
   const [desabilitado, setdesabilitado] = useState(true)
+  const [total, setTotal] = useState(0)
 
   const url = 'http://localhost:3000/selecao'
 
@@ -52,7 +53,16 @@ export function SelecaoForm() {
     try {
       //get Selecao
       const resultado = await axios.get(url)
-      setSelecao(resultado.data)
+      const dados = resultado.data
+      setSelecao(dados)
+      //subtotal e total
+      const dadosFilter = dados.filter(dado => dado.pedido_id == pedido_id)
+      console.log(dadosFilter)
+      const total = dadosFilter.reduce((total, dado) => {
+        return (total += dado.subtotal)
+      }, 0)
+      console.log('TOTAL: ' + total)
+      atualizarTotalPedido()
 
       //get Pizzas
       const res_pizzas = await axios.get('http://localhost:3000/pizzas')
@@ -67,6 +77,25 @@ export function SelecaoForm() {
     const precoFilter = pizzaFilter[0].preco
     setPreco(precoFilter)
     setdesabilitado(false)
+  }
+
+  async function atualizarTotalPedido() {
+    try {
+      //get Selecao para posterior filtragem. OBS: TENTAR CRIAR NO BACKEND UMA ROTA PARA FILTRAR DIRETAMENTE AS PIZZAS_PEDIDOS CUJOS ID_PEDIDO SEJAM IGUAIS AO DESEJADO, DISPENSANDO, ASSIM, A NECESSIDADE DE SE FILTRAR AQUI.
+      const resultado = await axios.get(`${url}/${pedido_id}`)
+      const dados = resultado.data
+      console.log('RESULTADO DA SELEÇÃO')
+      console.log(dados)
+      const total = dados.reduce((total, dado) => {
+        return (total += dado.subtotal)
+      }, 0)
+      console.log('TOTAL UPDATE: ' + total)
+
+      //update da variável "total" no Model PEDIDO
+      await axios.put(`http://localhost:3000/pedidos/${pedido_id}`, { total })
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
   useEffect(() => {
@@ -89,7 +118,6 @@ export function SelecaoForm() {
         <div className="form-group">
           <select
             className="form-control-md"
-            /* onChange={e => setPizzaSelecionada(e.target.value)} */
             onClick={e => {
               getSubtotal(e.target.value)
               setPizzaSelecionada(e.target.value)

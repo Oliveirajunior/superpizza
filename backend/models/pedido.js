@@ -11,17 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Cliente, {
         foreignKey: 'cliente_id',
-        as: 'cliente_que_pediu'
+        as: 'cliente'
       })
-      this.hasMany(models.Pizza_pedido, {
-        foreignKey: 'pedido_id',
-        as: 'selecoes_realizadas'
-      })
+      this.belongsTo(models.Pizza, { foreignKey: 'pizza_id', as: 'pizza' })
     }
   }
   Pedido.init(
     {
       cliente_id: DataTypes.INTEGER,
+      pizza_id: DataTypes.INTEGER,
+      quantidade: DataTypes.INTEGER,
       total: DataTypes.FLOAT
     },
     {

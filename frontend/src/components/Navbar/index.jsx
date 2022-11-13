@@ -22,11 +22,6 @@ export function Navbar() {
             Pedidos
           </a>
         </li>
-        <li className="nav-item">
-          <a href="/selecao" className="nav-link">
-            Selecao
-          </a>
-        </li>
       </ul>
     </nav>
   )

@@ -7,8 +7,6 @@ import { ClientesPage } from './Pages/ClientesPage'
 import { AlterarClientesPage } from './Pages/AlterarClientesPage'
 import { PedidosPage } from './Pages/PedidosPage'
 import { AlterarPedidosPage } from './Pages/AlterarPedidosPage'
-import { SelecaoPage } from './Pages/SelecaoPage'
-import { AlterarSelecaoPage } from './Pages/AlterarSelecaoPage'
 
 export function App() {
   return (
@@ -25,8 +23,6 @@ export function App() {
           />
           <Route path="/pedidos" element={<PedidosPage />} />
           <Route path="/pedidos/:id/update" element={<AlterarPedidosPage />} />
-          <Route path="/selecao" element={<SelecaoPage />} />
-          <Route path="/selecao/:id/update" element={<AlterarSelecaoPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,7 +5,6 @@ const dotenv = require('dotenv')
 const pizzasRouter = require('./routes/pizzas.routes')
 const clientesRouter = require('./routes/clientes.routes')
 const pedidosRouter = require('./routes/pedidos.routes')
-const pizza_PedidosRouter = require('./routes/pizza_pedidos.routes')
 
 //.env
 dotenv.config()
@@ -17,7 +16,6 @@ app.use(cors())
 app.use('/pizzas', pizzasRouter)
 app.use('/clientes', clientesRouter)
 app.use('/pedidos', pedidosRouter)
-app.use('/selecao', pizza_PedidosRouter)
 
 //PORT
 const PORT = process.env.PORT || 8000
