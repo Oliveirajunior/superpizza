@@ -7,6 +7,7 @@ import { ClientesPage } from './Pages/ClientesPage'
 import { AlterarClientesPage } from './Pages/AlterarClientesPage'
 import { PedidosPage } from './Pages/PedidosPage'
 import { AlterarPedidosPage } from './Pages/AlterarPedidosPage'
+import { SelecoesPage } from './Pages/SelecoesPage'
 
 export function App() {
   return (
@@ -22,7 +23,8 @@ export function App() {
             element={<AlterarClientesPage />}
           />
           <Route path="/pedidos" element={<PedidosPage />} />
-          <Route path="/pedidos/:id/update" element={<AlterarPedidosPage />} />
+
+          <Route path="/selecoes/:id" element={<SelecoesPage />} />
         </Routes>
       </BrowserRouter>
     </div>

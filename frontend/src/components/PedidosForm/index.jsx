@@ -2,33 +2,28 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { PedidosCard } from '../PedidosCard'
+import { url } from '../../../config/URL'
 
 export function PedidosForm() {
   const [pedidos, setPedidos] = useState([])
-  const [quantidade, setQuantidade] = useState(1)
   //OBS: O TOTAL É CÁLCULADO DIRETAMENTE NO BACKEND. O CLIENTE_ID E A PIZZA_ID ESTÃO, RESPECTIVAMENTE, NO CLIENTESELECIONADO E PIZZASELECIONADA
 
   const [clientes, setClientes] = useState([])
   const [clienteSelecionado, setClienteSelecionado] = useState('')
 
-  const [pizzas, setPizzas] = useState([])
-  const [pizzaSelecionada, setPizzaSelecionada] = useState('')
-
   let navigate = useNavigate()
 
-  const url = 'http://localhost:3000/pedidos'
+  //urls
+  const { URL_PEDIDOS } = url
+  const { URL_CLIENTES } = url
 
   async function adicionarPedido() {
     try {
-      const cliente_id = clienteSelecionado
-      const pizza_id = pizzaSelecionada
-      await axios.post(url, { cliente_id, pizza_id, quantidade })
+      const id_cliente = clienteSelecionado
+      await axios.post(URL_PEDIDOS, { id_cliente })
       getData()
       setClientes([])
       setClienteSelecionado('')
-      setPizzas([])
-      setPizzaSelecionada('')
-      setQuantidade(1)
     } catch (error) {
       console.error(error.message)
     }
@@ -36,30 +31,26 @@ export function PedidosForm() {
 
   async function excluirPedido(id) {
     try {
-      await axios.delete(`${url}/${id}`)
+      await axios.delete(`${URL_PEDIDOS}/${id}`)
       getData()
     } catch (error) {
       console.error(error.message)
     }
   }
 
-  async function alterarPedido(id) {
-    navigate(`/pedidos/${id}/update`)
+  async function fazerSelecao(id) {
+    navigate(`/selecoes/${id}`)
   }
 
   async function getData() {
     try {
       //getPedidos
-      const res_pedidos = await axios.get(`${url}`)
+      const res_pedidos = await axios.get(URL_PEDIDOS)
       setPedidos(res_pedidos.data)
 
       //getClientes
-      const res_clientes = await axios.get('http://localhost:3000/clientes')
+      const res_clientes = await axios.get(URL_CLIENTES)
       setClientes(res_clientes.data)
-
-      //getPizzas
-      const res_pizzas = await axios.get('http://localhost:3000/pizzas')
-      setPizzas(res_pizzas.data)
     } catch (error) {
       console.error(error.message)
     }
@@ -74,7 +65,7 @@ export function PedidosForm() {
       <form>
         <div className="form-group">
           <select
-            className="form-control-md"
+            className="form-control-md text-center"
             onClick={e => setClienteSelecionado(e.target.value)}
           >
             <option disabled={true}>{'Selecione o Cliente'}</option>
@@ -87,62 +78,37 @@ export function PedidosForm() {
             })}
           </select>
         </div>
-        <div className="form-group">
-          <select
-            className="form-control-md"
-            onClick={e => {
-              //getSubtotal(e.target.value)
-              setPizzaSelecionada(e.target.value)
-            }}
-          >
-            <option disabled={true}>{'Escolha a Pizza'}</option>
-            {pizzas.map(pizza => {
-              return (
-                <option key={pizza.id} value={pizza.id}>
-                  {pizza.sabor} +R$ {pizza.preco}
-                </option>
-              )
-            })}
-          </select>
-        </div>
-        <div className="form-group">
-          <input
-            type="number"
-            className="form-control-md"
-            placeholder="Digite a Quantidade"
-            id="quantidade"
-            value={quantidade}
-            onChange={e => {
-              setQuantidade(e.target.value)
-              //getSubtotal(pizzaSelecionada)
-            }}
-          />
-        </div>
 
-        <button
-          type="button"
-          className="btn btn-primary m-2"
-          onClick={adicionarPedido}
-        >
-          Adicionar
-        </button>
-      </form>
-      {
-        <div className="m-2">
-          {pedidos.map(pedido => (
-            <PedidosCard
-              key={pedido.id}
-              id={pedido.id}
-              cliente={pedido.cliente.nome}
-              pizza={pedido.pizza.sabor}
-              quantidade={pedido.quantidade}
-              total={pedido.total}
-              excluir={() => excluirPedido(pedido.id)}
-              alterar={() => alterarPedido(pedido.id)}
-            />
-          ))}
+        <div className="form-group">
+          <button
+            type="button"
+            className="btn btn-primary m-2"
+            onClick={adicionarPedido}
+          >
+            Novo Pedido
+          </button>
         </div>
-      }
+      </form>
+
+      <div className="m-2">
+        <div className="row m-2">
+          <div className="col m-2">ID. PEDIDO</div>
+          <div className="col m-2">CLIENTE</div>
+          <div className="col m-2">TOTAL</div>
+          <div className="col m-2">EXCLUIR</div>
+          <div className="col m-2">SELECIONAR</div>
+        </div>
+        {pedidos.map(pedido => (
+          <PedidosCard
+            key={pedido.id}
+            id={pedido.id}
+            cliente={pedido.cliente.nome}
+            total={pedido.total}
+            excluir={() => excluirPedido(pedido.id)}
+            selecionar={() => fazerSelecao(pedido.id)}
+          />
+        ))}
+      </div>
     </div>
   )
 }

@@ -1,35 +1,21 @@
-export function PedidosCard({
-  id,
-  cliente,
-  pizza,
-  quantidade,
-  total,
-  excluir,
-  alterar
-}) {
+export function PedidosCard({ id, cliente, total, excluir, selecionar }) {
   return (
     <div className="row m-2">
-      <div className="col">
-        ID. PEDIDO <strong> {id}</strong>
+      <div className="col m-2">
+        <strong> {id}</strong>
       </div>
-      <div className="col">
-        CLIENTE <strong> {cliente}</strong>
+      <div className="col m-2">
+        <strong> {cliente}</strong>
       </div>
-      <div className="col">
-        PIZZA <strong> {pizza}</strong>
-      </div>
-      <div className="col">
-        QTDE. <strong> {quantidade}</strong>
-      </div>
-      <div className="col">TOTAL: R${total}</div>
-      <div className="col">
+      <div className="col m-2"> R$ {total}</div>
+      <div className="col m-2">
         <button className="btn btn-danger" type="button" onClick={excluir}>
           Excluir
         </button>
       </div>
-      <div className="col">
-        <button className="btn btn-warning" type="button" onClick={alterar}>
-          Alterar
+      <div className="col m-2">
+        <button className="btn btn-warning" type="button" onClick={selecionar}>
+          Selecionar
         </button>
       </div>
     </div>

@@ -7,19 +7,13 @@ module.exports = {
       'Pedidos',
       [
         {
-          cliente_id: '1',
-          pizza_id: '1',
-          quantidade: '1'
+          id_cliente: '1'
         },
         {
-          cliente_id: '2',
-          pizza_id: '2',
-          quantidade: '3'
+          id_cliente: '2'
         },
         {
-          cliente_id: '2',
-          pizza_id: '3',
-          quantidade: '1'
+          id_cliente: '3'
         }
       ],
       {}

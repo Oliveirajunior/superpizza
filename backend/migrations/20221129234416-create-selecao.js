@@ -2,19 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Pedidos', {
+    await queryInterface.createTable('Selecoes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_cliente: {
+      id_pizza: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Clientes', key: 'id' }
+        references: { model: 'Pizzas', key: 'id' }
       },
-      total: {
+      id_pedido: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Pedidos', key: 'id' }
+      },
+      quantidade: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      subtotal: {
         allowNull: false,
         type: Sequelize.FLOAT,
         defaultValue: 0.0
@@ -32,6 +41,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Pedidos')
+    await queryInterface.dropTable('Selecoes')
   }
 }
