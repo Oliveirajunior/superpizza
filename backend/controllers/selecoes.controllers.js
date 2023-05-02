@@ -15,7 +15,7 @@ module.exports = {
       console.error(error.message)
     }
   },
-  async selecionar(req, res) {
+  /* async selecionar(req, res) {
     try {
       const { id } = req.params
       const resultado = await Selecao.findByPk(id)
@@ -23,8 +23,27 @@ module.exports = {
     } catch (error) {
       console.error(error.message)
     }
+  }, */
+  //LISTAR POR ID_PEDIDO
+  async selecionar(req, res) {
+    try {
+      const { id } = req.params
+      const resultado = await Selecao.findAll(
+        { where: { id_pedido: id } },
+        {
+          order: [['id', 'ASC']],
+          include: [
+            { model: Pedido, as: 'pedido' },
+            { model: Pizza, as: 'pizza' }
+          ]
+        }
+      )
+      return res.json(resultado)
+    } catch (error) {
+      console.error(error.message)
+    }
   },
-  async alterar(req, res) {
+  /* async alterar(req, res) {
     try {
       const { id, id_pedido } = req.params
       const { id_pizza, quantidade, subtotal } = req.body
@@ -36,7 +55,7 @@ module.exports = {
     } catch (error) {
       console.error(error.message)
     }
-  },
+  }, */
   async incluir(req, res) {
     try {
       const { id_pizza, id_pedido, quantidade } = req.body

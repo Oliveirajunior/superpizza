@@ -58,7 +58,17 @@ export function PizzasForm() {
             placeholder="Digite o Sabor"
             id="sabor"
             value={sabor}
-            onChange={e => setSabor(e.target.value)}
+            onChange={e => {
+              if (
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('Digite o sabor')
+              } else {
+                setSabor(e.target.value)
+              }
+            }}
           />
         </div>
         <div className="form-group">
@@ -68,7 +78,18 @@ export function PizzasForm() {
             placeholder="Digite o Preco"
             id="preco"
             value={preco}
-            onChange={e => setPreco(e.target.value)}
+            onChange={e => {
+              if (
+                Number(e.target.value) < 0 ||
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('O valor não pode ser menor que 0')
+              } else {
+                setPreco(e.target.value)
+              }
+            }}
           />
         </div>
         <button

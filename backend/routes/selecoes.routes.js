@@ -10,7 +10,7 @@ route.get('/', selecoesControllers.listar)
 route.get('/:id', selecoesControllers.selecionar)
 
 //alterar
-route.put('/:id', selecoesControllers.alterar)
+//route.put('/:id', selecoesControllers.alterar)
 
 //incluir
 route.post('/', selecoesControllers.incluir)

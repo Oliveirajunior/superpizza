@@ -66,7 +66,17 @@ export function PedidosForm() {
         <div className="form-group">
           <select
             className="form-control-md text-center"
-            onClick={e => setClienteSelecionado(e.target.value)}
+            onClick={e => {
+              if (
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('Escolha o cliente')
+              } else {
+                setClienteSelecionado(e.target.value)
+              }
+            }}
           >
             <option disabled={true}>{'Selecione o Cliente'}</option>
             {clientes.map(cliente => {

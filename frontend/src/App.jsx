@@ -6,7 +6,6 @@ import { AlterarPizzasPage } from './Pages/AlterarPizzasPage'
 import { ClientesPage } from './Pages/ClientesPage'
 import { AlterarClientesPage } from './Pages/AlterarClientesPage'
 import { PedidosPage } from './Pages/PedidosPage'
-import { AlterarPedidosPage } from './Pages/AlterarPedidosPage'
 import { SelecoesPage } from './Pages/SelecoesPage'
 
 export function App() {

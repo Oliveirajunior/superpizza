@@ -58,7 +58,17 @@ export function ClientesForm() {
             placeholder="Digite o Nome"
             id="nome"
             value={nome}
-            onChange={e => setNome(e.target.value)}
+            onChange={e => {
+              if (
+                e.target.value == null ||
+                e.target.value == undefined ||
+                String(e.target.value) == ''
+              ) {
+                console.error('Digite o nome do cliente')
+              } else {
+                setNome(e.target.value)
+              }
+            }}
           />
         </div>
         <div className="form-group">
@@ -68,7 +78,17 @@ export function ClientesForm() {
             placeholder="Digite o Telefone"
             id="fone"
             value={fone}
-            onChange={e => setFone(e.target.value)}
+            onChange={e => {
+              if (
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('Digite o telefone')
+              } else {
+                setFone(e.target.value)
+              }
+            }}
           />
         </div>
         <button

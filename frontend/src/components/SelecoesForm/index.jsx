@@ -26,7 +26,6 @@ export function SelecoesForm() {
     try {
       const id_pizza = pizzaSelecionada
       const id_pedido = id
-      console.log(id_pedido)
       await axios.post(URL_SELECOES, { id_pizza, id_pedido, quantidade })
       getData()
       setPizzas([])
@@ -46,20 +45,20 @@ export function SelecoesForm() {
     }
   }
 
-  async function alterarSelecao(id) {
+  /*   async function alterarSelecao(id) {
     navigate(`/pedidos/${id}/update`)
-  }
+  } */
 
   async function getData() {
     try {
-      //getSelecoes por pedido
+      //getSelecoes (depois, filtrada por pedido)
       const id_pedido = id
       const res_selecoes = await axios.get(URL_SELECOES)
       const data = res_selecoes.data
       console.log(data)
       const filter = data.filter(element => element.id_pedido == id_pedido)
+      console.log(filter)
       setSelecoes(filter)
-      //console.log(id_pedido)
 
       //getPizzas
       const res_pizzas = await axios.get(URL_PIZZAS)
@@ -83,8 +82,15 @@ export function SelecoesForm() {
           <select
             className="form-control-md text-center"
             onClick={e => {
-              //getSubtotal(e.target.value)
-              setPizzaSelecionada(e.target.value)
+              if (
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('Escolha a Pizza')
+              } else {
+                setPizzaSelecionada(e.target.value)
+              }
             }}
           >
             <option disabled={true}>{'Escolha a Pizza'}</option>
@@ -100,11 +106,23 @@ export function SelecoesForm() {
         <div className="form-group">
           <input
             type="number"
+            min="1"
             className="form-control-md text-center"
             id="quantidade"
             value={quantidade}
             onChange={e => {
-              setQuantidade(e.target.value)
+              if (
+                Number(e.target.value) < 1 ||
+                e.target.value == null ||
+                e.target.value == undefined ||
+                e.target.value == ''
+              ) {
+                console.error('quantidade não pode ser menor que 1')
+                setQuantidade(1)
+              } else {
+                setQuantidade(e.target.value)
+              }
+
               //getSubtotal(pizzaSelecionada)
             }}
           />
