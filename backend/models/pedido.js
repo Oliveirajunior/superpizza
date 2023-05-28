@@ -21,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Pedido.init(
     {
-      id_cliente: DataTypes.INTEGER,
-      total: DataTypes.FLOAT
+      id_cliente: DataTypes.INTEGER
     },
     {
       sequelize,

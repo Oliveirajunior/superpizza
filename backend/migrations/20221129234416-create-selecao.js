@@ -23,11 +23,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      subtotal: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-        defaultValue: 0.0
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -1,6 +1,6 @@
 const { Cliente } = require('../models')
 
-module.exports = {
+const ClienteController = {
   async listar(req, res) {
     try {
       const resultado = await Cliente.findAll({ order: [['id', 'ASC']] })
@@ -47,3 +47,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = { ClienteController }

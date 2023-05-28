@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Pizza.init(
     {
       sabor: DataTypes.STRING,
-      preco: DataTypes.FLOAT
+      preco: DataTypes.INTEGER
     },
     {
       sequelize,

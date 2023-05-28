@@ -8,15 +8,15 @@ module.exports = {
       [
         {
           sabor: 'Calabresa',
-          preco: 100.0
+          preco: 10000
         },
         {
           sabor: 'Portuguesa',
-          preco: 120.0
+          preco: 12000
         },
         {
           sabor: 'Palmito',
-          preco: 150.0
+          preco: 15000
         }
       ],
       {}

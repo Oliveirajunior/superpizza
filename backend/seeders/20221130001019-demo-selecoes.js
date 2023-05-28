@@ -7,23 +7,23 @@ module.exports = {
       'Selecoes',
       [
         {
-          id_pizza: '2',
           id_pedido: '1',
+          id_pizza: '2',
           quantidade: '1'
         },
         {
-          id_pizza: '3',
           id_pedido: '2',
+          id_pizza: '3',
           quantidade: '2'
         },
         {
-          id_pizza: '1',
           id_pedido: '3',
+          id_pizza: '1',
           quantidade: '3'
         },
         {
-          id_pizza: '2',
           id_pedido: '3',
+          id_pizza: '2',
           quantidade: '1'
         }
       ],

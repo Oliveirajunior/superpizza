@@ -14,11 +14,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Clientes', key: 'id' }
       },
-      total: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-        defaultValue: 0.0
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

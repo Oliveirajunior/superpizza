@@ -1,6 +1,6 @@
 const { Selecao, Pedido, Pizza } = require('../models')
 
-module.exports = {
+const SelecaoController = {
   async listar(req, res) {
     try {
       const resultado = await Selecao.findAll({
@@ -80,3 +80,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = { SelecaoController }

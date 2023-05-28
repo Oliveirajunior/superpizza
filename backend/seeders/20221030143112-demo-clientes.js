@@ -8,15 +8,18 @@ module.exports = {
       [
         {
           nome: 'Superman',
-          fone: '555-111'
+          email: 'sups@dc.com',
+          senha: 'krypton'
         },
         {
           nome: 'Batman',
-          fone: '555-222'
+          email: 'morcegao@dc.com',
+          senha: 'iambatman'
         },
         {
           nome: 'Wonder Woman',
-          fone: '555-333'
+          email: 'ww@dc.com',
+          senha: 'amazonas'
         }
       ],
       {}

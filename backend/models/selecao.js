@@ -21,10 +21,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Selecao.init(
     {
-      id_pizza: DataTypes.INTEGER,
       id_pedido: DataTypes.INTEGER,
-      quantidade: DataTypes.INTEGER,
-      subtotal: DataTypes.FLOAT
+      id_pizza: DataTypes.INTEGER,
+      quantidade: DataTypes.INTEGER
     },
     {
       sequelize,
